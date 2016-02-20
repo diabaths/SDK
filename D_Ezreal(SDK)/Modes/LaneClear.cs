@@ -6,6 +6,8 @@ using Settings = D_Ezreal_SDK_.Config.Modes.LaneClear;
 
 namespace D_Ezreal_SDK_.Modes
 {
+    using System.Collections.Generic;
+
     using LeagueSharp;
     using LeagueSharp.SDK.Core.Wrappers.Damages;
 
@@ -31,7 +33,8 @@ namespace D_Ezreal_SDK_.Modes
 
                     var killcount = 0;
 
-                    foreach (var collisionMinion in prediction.CollisionObjects.OrderBy(x => x.Distance(GameObjects.Player)))
+                    foreach (
+                        var collisionMinion in prediction.CollisionObjects.OrderBy(x => x.Distance(GameObjects.Player)))
                     {
                         if (collisionMinion.IsKillableWithQ())
                         {
@@ -43,7 +46,7 @@ namespace D_Ezreal_SDK_.Modes
                         }
                     }
 
-                    if (killcount < 1)
+                    if (killcount < 0)
                     {
                         continue;
                     }
@@ -51,6 +54,19 @@ namespace D_Ezreal_SDK_.Modes
                     if (Q.Cast(prediction.CastPosition))
                     {
                         break;
+                    }
+                }
+            }
+
+            if (Settings.UseW && W.IsReady() && GameObjects.Player.ManaPercent > Settings.MinMana)
+            {
+                var heroes = GameObjects.AllyHeroes;
+
+                foreach (var hero in heroes.Where(hero => !hero.IsDead))
+                {
+                    if (hero.DistanceToPlayer() <= SpellManager.W.Range && !hero.IsMe && hero.IsUnderEnemyTurret())
+                    {
+                        W.Cast(hero);
                     }
                 }
             }

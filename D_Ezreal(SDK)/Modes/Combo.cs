@@ -41,6 +41,11 @@ namespace D_Ezreal_SDK_.Modes
         internal override void Execute()
         {
             var ti = Variables.TargetSelector.GetTarget(Q);
+            if (Settings.UseIgnitecombo && Program.Ignite.IsReady() && ti.IsValidTarget(Program.IgniteRange) && ti.HealthPercent < Settings.Ignitehealth)
+            {
+                GameObjects.Player.Spellbook.CastSpell(Program.Ignite, ti);
+            }
+
             if (Items.HasItem(3146) && Items.CanUseItem(3146) && Config.Modes.Items.Offensive.Hextech
                 && ti.IsValidTarget(700) && ti.HealthPercent <= Config.Modes.Items.Offensive.HextechEnemyhp)
             {

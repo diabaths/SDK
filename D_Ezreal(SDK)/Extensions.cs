@@ -73,5 +73,12 @@ namespace D_Ezreal_SDK_
                    && target.Health + target.HPRegenRate + target.PhysicalShield
                    < target.GetWDamage() + target.GetQDamage();
         }
+
+        internal static bool combodamage(this Obj_AI_Base target, bool rangeCheck = true)
+        {
+            return target.IsValidTarget(rangeCheck ? SpellManager.W.Range : float.MaxValue)
+                   && target.Health + target.HPRegenRate + target.PhysicalShield
+                   < target.GetWDamage() + target.GetQDamage() + target.GetRDamage();
+        }
     }
 }

@@ -28,8 +28,9 @@ namespace D_Ezreal_SDK_
 
         private static void InitSummonerSpell()
         {
-            Ignite = Player.GetSpellSlot("summonerdot");
-            }
+            Ignite = GameObjects.Player.GetSpellSlot("summonerdot");
+
+        }
 
         private static void Load_OnLoad(object sender, EventArgs e)
         {
@@ -41,7 +42,7 @@ namespace D_Ezreal_SDK_
             Config.Initialize();
             SpellManager.Initialize();
             ModeManager.Initialize();
-
+            InitSummonerSpell();
 
             DamageIndicator.Initialize(
                 new List<DamageIndicator.DamageInfo>
@@ -97,15 +98,17 @@ namespace D_Ezreal_SDK_
 
         private static void usepotion()
         {
-           
+
             if (GameObjects.Player.InFountain() || GameObjects.Player.HasBuff("Recall")) return;
-            //if(Uti.CountEnemiesInRange(800) > 0)
-                if (Config.Modes.Items.Potions.UseHPpotion && GameObjects.Player.HealthPercent < Config.Modes.Items.Potions.minHP &&
-                    !(GameObjects.Player.HasBuff("RegenerationPotion") ||
-                      GameObjects.Player.HasBuff("ItemMiniRegenPotion")
-                      || GameObjects.Player.HasBuff("ItemCrystalFlask") ||
-                      GameObjects.Player.HasBuff("ItemCrystalFlaskJungle")
-                      || GameObjects.Player.HasBuff("ItemDarkCrystalFlask")))
+            if (GameObjects.Player.CountEnemyHeroesInRange(800) > 0)
+            {
+                if (Config.Modes.Items.Potions.UseHPpotion
+                    && GameObjects.Player.HealthPercent < Config.Modes.Items.Potions.minHP
+                    && !(GameObjects.Player.HasBuff("RegenerationPotion")
+                         || GameObjects.Player.HasBuff("ItemMiniRegenPotion")
+                         || GameObjects.Player.HasBuff("ItemCrystalFlask")
+                         || GameObjects.Player.HasBuff("ItemCrystalFlaskJungle")
+                         || GameObjects.Player.HasBuff("ItemDarkCrystalFlask")))
                 {
 
                     if (Items.HasItem(2010) && Items.CanUseItem(2010))
@@ -129,11 +132,12 @@ namespace D_Ezreal_SDK_
                         Items.UseItem(2033);
                     }
                 }
-            if (Config.Modes.Items.Potions.UseMPpotion && GameObjects.Player.ManaPercent < Config.Modes.Items.Potions.MinMP &&
-                !(GameObjects.Player.HasBuff("ItemDarkCrystalFlask") ||
-                      GameObjects.Player.HasBuff("ItemMiniRegenPotion") ||
-                      GameObjects.Player.HasBuff("ItemCrystalFlaskJungle") ||
-                      GameObjects.Player.HasBuff("ItemCrystalFlask")))
+                if (Config.Modes.Items.Potions.UseMPpotion
+                    && GameObjects.Player.ManaPercent < Config.Modes.Items.Potions.MinMP
+                    && !(GameObjects.Player.HasBuff("ItemDarkCrystalFlask")
+                         || GameObjects.Player.HasBuff("ItemMiniRegenPotion")
+                         || GameObjects.Player.HasBuff("ItemCrystalFlaskJungle")
+                         || GameObjects.Player.HasBuff("ItemCrystalFlask")))
                 {
                     if (Items.HasItem(2041) && Items.CanUseItem(2041))
                     {
@@ -153,7 +157,8 @@ namespace D_Ezreal_SDK_
                     }
                 }
             }
-        
+        }
+
         private static void Orbwalker_OnAction(object sender, OrbwalkingActionArgs e)
         {
             if (!e.Sender?.IsMe == false)
@@ -198,22 +203,22 @@ namespace D_Ezreal_SDK_
         {
             if (Config.Modes.Drawings.DrawQRange)
             {
-                Drawing.DrawCircle(GameObjects.Player.Position, SpellManager.Q.Range, Color.OrangeRed);
+                Drawing.DrawCircle(GameObjects.Player.Position, SpellManager.Q.Range, Color.BlueViolet);
             }
 
             if (Config.Modes.Drawings.DrawWRange)
             {
-                Drawing.DrawCircle(GameObjects.Player.Position, SpellManager.W.Range, Color.DeepSkyBlue);
+                Drawing.DrawCircle(GameObjects.Player.Position, SpellManager.W.Range, Color.BlueViolet);
             }
 
             if (Config.Modes.Drawings.DrawERange)
             {
-                Drawing.DrawCircle(GameObjects.Player.Position, SpellManager.E.Range, Color.DeepSkyBlue);
+                Drawing.DrawCircle(GameObjects.Player.Position, SpellManager.E.Range, Color.BlueViolet);
             }
 
             if (Config.Modes.Drawings.DrawRRange)
             {
-                Drawing.DrawCircle(GameObjects.Player.Position, SpellManager.R.Range, Color.DeepSkyBlue);
+                Drawing.DrawCircle(GameObjects.Player.Position, SpellManager.R.Range, Color.BlueViolet);
             }
         }
     }

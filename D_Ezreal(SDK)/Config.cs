@@ -107,6 +107,8 @@ namespace D_Ezreal_SDK_
                 
                 private static readonly MenuSliderButton _minrange;
 
+                private static readonly MenuSliderButton _Ignitehealth;
+                
                 internal static bool UseIgnitecombo => _useIgnitecombo.Value;
 
                 internal static bool UseQ => _useQ.Value;
@@ -116,16 +118,24 @@ namespace D_Ezreal_SDK_
                 internal static bool UseR => _useR.Value;
 
                 internal static int Minrange => _minrange.Value;
-                
+
+                internal static int Ignitehealth => _Ignitehealth.Value;
+
                 static Combo()
                 {
                     Menu = Modes.Menu.Add(new Menu("Combo", "Combo"));
                     _useIgnitecombo = Menu.Add(new MenuBool("UseIgnitecombo", "Use Ignite", true));
+                    _Ignitehealth =
+                        Menu.Add(
+                            new MenuSliderButton("Ignitehelth", "Use Ignite if Enemy Hp %<", 30, 0, 100)
+                                {
+                                    BValue = true
+                                });
                     _useQ = Menu.Add(new MenuBool("UseQ", "Use Q", true));
                     _useW = Menu.Add(new MenuBool("UseW", "Use W", true));
                     _useR = Menu.Add(new MenuBool("UseR", "Use R", true));
-                    _minrange = Menu.Add(new MenuSliderButton("Minrange", "Min Range to Use R", 700, 0, 1500) { BValue = true });
-                   
+                    _minrange =
+                        Menu.Add(new MenuSliderButton("Minrange", "Min Range to Use R", 700, 0, 1500) { BValue = true });
                 }
 
                 internal static void Initialize()
@@ -167,10 +177,11 @@ namespace D_Ezreal_SDK_
             {
                 internal static readonly Menu Menu;
                 private static readonly MenuBool _useQ;
+                private static readonly MenuBool _useW;
                 private static readonly MenuSliderButton _minMana;
 
                 internal static bool UseQ => _useQ.Value;
-
+                internal static bool UseW => _useW.Value;
                 internal static int MinMana => _minMana.Value;
 
                 static LaneClear()
@@ -178,6 +189,7 @@ namespace D_Ezreal_SDK_
                     Menu = Modes.Menu.Add(new Menu("LaneClear", "LaneClear"));
 
                     _useQ = Menu.Add(new MenuBool("UseQ", "Use Q", true));
+                    _useW = Menu.Add(new MenuBool("UseW", "Use W(under enemy tower)", true));
                     _minMana = Menu.Add(new MenuSliderButton("MinMana", "Min Mana %", 70, 0, 100) { BValue = true });
                 }
 

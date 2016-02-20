@@ -116,7 +116,7 @@ namespace D_Ezreal_SDK_.Modes
                         if (target.DistanceToPlayer() < target.GetRealAutoAttackRange()
                             && target.Health <= GameObjects.Player.GetAutoAttackDamage(target))
                             return;
-                        if (Settings.UseRM && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)))
+                        if (Settings.UseRM && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)) && target.DistanceToPlayer() > Config.Modes.Combo.Minrange)
                         {
                             R.Cast(prediction.CastPosition);
                         }
