@@ -150,7 +150,7 @@ namespace D_Ezreal_SDK_.Modes
                         if (target.DistanceToPlayer() < target.GetRealAutoAttackRange()
                             && target.Health <= GameObjects.Player.GetAutoAttackDamage(target)) return;
                         if (prediction.Hitchance >= HitChance.High
-                            && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)) && !target.IsDead && target.DistanceToPlayer() > Config.Modes.Combo.Minrange) R.Cast(prediction.CastPosition);
+                            && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)) && !target.IsDead && target.DistanceToPlayer() > Settings.Minrange) R.Cast(prediction.CastPosition);
                     }
                 }
             }

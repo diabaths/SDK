@@ -15,6 +15,7 @@ namespace D_Ezreal_SDK_
 
     internal static class Program
     {
+        internal static bool UseQ;
         private static int usemuranama;
         internal const int  IgniteRange = 600;
         internal static SpellSlot  Ignite;
@@ -164,6 +165,10 @@ namespace D_Ezreal_SDK_
             if (!e.Sender?.IsMe == false)
             {
                 return;
+            }
+            if (Variables.Orbwalker.GetActiveMode() == OrbwalkingMode.LaneClear && e.Type == OrbwalkingType.AfterAttack)
+            {
+                UseQ = true;
             }
             if (Variables.Orbwalker.GetActiveMode() == OrbwalkingMode.Combo && e.Type == OrbwalkingType.BeforeAttack
                 && Items.HasItem(3042) && Items.CanUseItem(3042) && Config.Modes.Items.Offensive.usemuramana

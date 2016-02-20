@@ -26,7 +26,7 @@ namespace D_Ezreal_SDK_.Modes
                 foreach (var minion in GameObjects.EnemyMinions.Where(x => x.IsKillableWithQ(true)))
                 {
                     var prediction = Q.GetPrediction(minion);
-                    if (prediction.Hitchance < HitChance.High && ObjectManager.Player.canttack())
+                    if (prediction.Hitchance < HitChance.High && Program.UseQ)
                     {
                         continue;
                     }

@@ -11,7 +11,7 @@ namespace D_Ezreal_SDK_
     {
         internal static bool canttack(this Obj_AI_Base hero)
         {
-            return hero.IsMe && hero.CanAttack;
+            return hero.IsMe && hero.Before;
         }
 
         internal static double GetQDamage(this Obj_AI_Base target)
