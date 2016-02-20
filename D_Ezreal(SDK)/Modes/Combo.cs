@@ -46,6 +46,13 @@ namespace D_Ezreal_SDK_.Modes
                 GameObjects.Player.Spellbook.CastSpell(Program.Ignite, ti);
             }
 
+            if ((Items.HasItem(3048) && Items.CanUseItem(3048) || Items.HasItem(3040) && Items.CanUseItem(3040)) && Config.Modes.Items.Deffensive.Archangel
+                && GameObjects.Player.CountEnemyHeroesInRange(800) > 0 && GameObjects.Player.HealthPercent <= Config.Modes.Items.Deffensive.Archangelmyhp)
+            {
+                Items.UseItem(3048);
+                Items.UseItem(3040);
+            }
+
             if (Items.HasItem(3146) && Items.CanUseItem(3146) && Config.Modes.Items.Offensive.Hextech
                 && ti.IsValidTarget(700) && ti.HealthPercent <= Config.Modes.Items.Offensive.HextechEnemyhp)
             {
