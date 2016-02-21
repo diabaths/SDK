@@ -7,6 +7,7 @@ using Settings = D_Ezreal_SDK_.Config.Modes.Misc;
 
 namespace D_Ezreal_SDK_.Modes
 {
+    using System;
     using LeagueSharp.SDK.Core.Wrappers.Damages;
 
     internal sealed class PermaActive : ModeBase
@@ -38,6 +39,7 @@ namespace D_Ezreal_SDK_.Modes
                         if (Settings.useQK && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQ(true)))
                         {
                             Q.Cast(prediction.CastPosition);
+                            Modes.Combo.castR = Environment.TickCount;
                         }
                     }
 
@@ -46,12 +48,14 @@ namespace D_Ezreal_SDK_.Modes
                         if (Settings.useQimmo)
                         {
                             Q.Cast(prediction.CastPosition);
+                            Modes.Combo.castR = Environment.TickCount;
                         }
 
                     if (prediction.Hitchance == HitChance.Dashing && Q.GetPrediction(target).CollisionObjects.Count == 0)
                         if (Settings.useQdash)
                         {
                             Q.Cast(prediction.CastPosition);
+                            Modes.Combo.castR = Environment.TickCount;
                         }
                 }
             }
@@ -76,6 +80,7 @@ namespace D_Ezreal_SDK_.Modes
                         if (Settings.useQK && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithW(true)))
                         {
                             W.Cast(prediction.CastPosition);
+                            Modes.Combo.castR = Environment.TickCount;
                         }
                     }
                 }
@@ -116,7 +121,7 @@ namespace D_Ezreal_SDK_.Modes
                         if (target.DistanceToPlayer() < target.GetRealAutoAttackRange()
                             && target.Health <= GameObjects.Player.GetAutoAttackDamage(target))
                             return;
-                        if (Settings.UseRM && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)) && target.DistanceToPlayer() > Config.Modes.Combo.Minrange)
+                        if (Environment.TickCount - Modes.Combo.castR > 500 && Settings.UseRM && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)) && target.DistanceToPlayer() > Config.Modes.Combo.Minrange)
                         {
                             R.Cast(prediction.CastPosition);
                         }

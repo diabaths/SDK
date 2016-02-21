@@ -29,10 +29,13 @@ namespace D_Ezreal_SDK_.Modes
     using System;
     using System.Runtime.Remoting.Messaging;
 
+
     using LeagueSharp.SDK.Core.Wrappers.Damages;
 
     internal sealed class Combo : ModeBase
     {
+        public static int castR;
+
         internal override bool ShouldBeExecuted()
         {
             return Config.Keys.ComboActive;
@@ -41,13 +44,15 @@ namespace D_Ezreal_SDK_.Modes
         internal override void Execute()
         {
             var ti = Variables.TargetSelector.GetTarget(Q);
-            if (Settings.UseIgnitecombo && Program.Ignite.IsReady() && ti.IsValidTarget(Program.IgniteRange) && ti.HealthPercent < Settings.Ignitehealth)
+            if (Settings.UseIgnitecombo && Program.Ignite.IsReady() && ti.IsValidTarget(Program.IgniteRange)
+                && ti.HealthPercent < Settings.Ignitehealth)
             {
                 GameObjects.Player.Spellbook.CastSpell(Program.Ignite, ti);
             }
 
-            if ((Items.HasItem(3048) && Items.CanUseItem(3048) || Items.HasItem(3040) && Items.CanUseItem(3040)) && Config.Modes.Items.Deffensive.Archangel
-                && GameObjects.Player.CountEnemyHeroesInRange(800) > 0 && GameObjects.Player.HealthPercent <= Config.Modes.Items.Deffensive.Archangelmyhp)
+            if ((Items.HasItem(3048) && Items.CanUseItem(3048) || Items.HasItem(3040) && Items.CanUseItem(3040))
+                && Config.Modes.Items.Deffensive.Archangel && GameObjects.Player.CountEnemyHeroesInRange(800) > 0
+                && GameObjects.Player.HealthPercent <= Config.Modes.Items.Deffensive.Archangelmyhp)
             {
                 Items.UseItem(3048);
                 Items.UseItem(3040);
@@ -92,6 +97,7 @@ namespace D_Ezreal_SDK_.Modes
                     if (prediction.Hitchance >= HitChance.High && Q.GetPrediction(target).CollisionObjects.Count == 0)
                     {
                         Q.Cast(prediction.CastPosition);
+                        castR = Environment.TickCount;
                     }
                 }
             }
@@ -114,10 +120,12 @@ namespace D_Ezreal_SDK_.Modes
                     if (prediction.Hitchance >= HitChance.High)
                     {
                         W.Cast(prediction.CastPosition);
+                        castR = Environment.TickCount;
                     }
                 }
             }
-            if (R.IsReady() && Settings.UseR)
+
+            if (R.IsReady() && Settings.UseR && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)))
             {
                 var target = Variables.TargetSelector.GetTarget(R);
                 if (target != null)
@@ -125,38 +133,33 @@ namespace D_Ezreal_SDK_.Modes
                     var prediction =
                         Movement.GetPrediction(
                             new PredictionInput
-                            {
-                                Unit = target,
-                                Delay = R.Delay,
-                                Radius = R.Width,
-                                Speed = R.Speed,
-                                Range = R.Range
-                            });
+                                {
+                                    Unit = target,
+                                    Delay = R.Delay,
+                                    Radius = R.Width,
+                                    Speed = R.Speed,
+                                    Range = R.Range
+                                });
 
                     {
                         if (Q.IsReady() && W.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQW(true))
-                            && target.IsValidTarget(Q.Range))
-                            return;
+                            && target.IsValidTarget(Q.Range)) return;
                         if (Q.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQ(true))
                             && target.IsValidTarget(Q.Range)) return;
                         if (W.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithW(true))
                             && target.IsValidTarget(W.Range)) return;
                         if (Q.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQAuto(true))
-                           && target.IsValidTarget(Q.Range))
-                            return;
+                            && target.IsValidTarget(Q.Range)) return;
                         if (W.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithWAuto(true))
-                            && target.IsValidTarget(W.Range))
-                            return;
+                            && target.IsValidTarget(W.Range)) return;
                         if (target.DistanceToPlayer() < target.GetRealAutoAttackRange()
                             && target.Health <= GameObjects.Player.GetAutoAttackDamage(target)) return;
-                        if (prediction.Hitchance >= HitChance.High
-                            && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)) && !target.IsDead && target.DistanceToPlayer() > Settings.Minrange) R.Cast(prediction.CastPosition);
+                        if (prediction.Hitchance >= HitChance.High && Environment.TickCount - castR > 500
+                            && !target.IsDead && target.DistanceToPlayer() > Settings.Minrange) R.Cast(prediction.CastPosition);
                     }
                 }
             }
         }
     }
 }
-
-    
 
