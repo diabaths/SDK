@@ -115,19 +115,32 @@ namespace D_Ezreal_SDK_.Modes
                 var target = Variables.TargetSelector.GetTarget(R);
                 if (target != null)
                 {
+                    var prediction =
+                        Movement.GetPrediction(
+                            new PredictionInput
+                                {
+                                    Unit = target,
+                                    Delay = R.Delay,
+                                    Radius = R.Width,
+                                    Speed = R.Speed,
+                                    Range = R.Range
+                                });
+
                     {
                         if (Q.IsReady() && W.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQW(true))
                             && target.IsValidTarget(Q.Range)) return;
                         if (Q.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQ(true))
                             && target.IsValidTarget(Q.Range)) return;
-                        
+                        if (W.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithW(true))
+                            && target.IsValidTarget(W.Range)) return;
                         if (Q.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQAuto(true))
                             && target.IsValidTarget(Q.Range)) return;
-                      
+                        if (W.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithWAuto(true))
+                            && target.IsValidTarget(W.Range)) return;
                         if (target.DistanceToPlayer() < target.GetRealAutoAttackRange()
                             && target.Health <= GameObjects.Player.GetAutoAttackDamage(target)) return;
-                        if (Environment.TickCount - castR > 500
-                            && !target.IsDead && target.DistanceToPlayer() > Settings.Minrange) R.Cast(target);
+                        if (prediction.Hitchance >= HitChance.High && Environment.TickCount - castR > 500
+                            && !target.IsDead && target.DistanceToPlayer() > Settings.Minrange) R.Cast(prediction.CastPosition);
                     }
                 }
             }
