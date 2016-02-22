@@ -10,26 +10,11 @@ using SharpDX;
 
 using Collision = LeagueSharp.SDK.Collision;
 using Settings = D_Ezreal_SDK_.Config.Modes.Combo;
-/*internal static bool UseQ => _useQ.Value;
-
-internal static bool UseW => _useW.Value;
-
-internal static bool UseR => _useR.Value;
-
-internal static bool UseRE => _useRE.Value;
-
-internal static int Mintargets => _minTargets.Value;
-
-internal static int Minrange => _minrange.Value;
-
-internal static int Maxrange => _maxrange.Value;*/
 
 namespace D_Ezreal_SDK_.Modes
 {
     using System;
-    using System.Runtime.Remoting.Messaging;
-
-
+   
     using LeagueSharp.SDK.Core.Wrappers.Damages;
 
     internal sealed class Combo : ModeBase
@@ -130,32 +115,19 @@ namespace D_Ezreal_SDK_.Modes
                 var target = Variables.TargetSelector.GetTarget(R);
                 if (target != null)
                 {
-                    var prediction =
-                        Movement.GetPrediction(
-                            new PredictionInput
-                                {
-                                    Unit = target,
-                                    Delay = R.Delay,
-                                    Radius = R.Width,
-                                    Speed = R.Speed,
-                                    Range = R.Range
-                                });
-
                     {
                         if (Q.IsReady() && W.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQW(true))
                             && target.IsValidTarget(Q.Range)) return;
                         if (Q.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQ(true))
                             && target.IsValidTarget(Q.Range)) return;
-                        if (W.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithW(true))
-                            && target.IsValidTarget(W.Range)) return;
+                        
                         if (Q.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQAuto(true))
                             && target.IsValidTarget(Q.Range)) return;
-                        if (W.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithWAuto(true))
-                            && target.IsValidTarget(W.Range)) return;
+                      
                         if (target.DistanceToPlayer() < target.GetRealAutoAttackRange()
                             && target.Health <= GameObjects.Player.GetAutoAttackDamage(target)) return;
-                        if (prediction.Hitchance >= HitChance.High && Environment.TickCount - castR > 500
-                            && !target.IsDead && target.DistanceToPlayer() > Settings.Minrange) R.Cast(prediction.CastPosition);
+                        if (Environment.TickCount - castR > 500
+                            && !target.IsDead && target.DistanceToPlayer() > Settings.Minrange) R.Cast(target);
                     }
                 }
             }

@@ -6,8 +6,6 @@ using Settings = D_Ezreal_SDK_.Config.Modes.LaneClear;
 
 namespace D_Ezreal_SDK_.Modes
 {
-    using LeagueSharp.SDK.Core.Wrappers.Damages;
-
     internal sealed class LaneClear : ModeBase
     {
         internal override bool ShouldBeExecuted()

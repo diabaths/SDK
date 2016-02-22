@@ -5,7 +5,7 @@ using LeagueSharp.SDK.Core.Utils;
 
 using Settings = D_Ezreal_SDK_.Config.Modes.Misc;
 
-namespace D_Ezreal_SDK_.Modes
+namespace  D_Ezreal_SDK_.Modes
 {
     using System;
     using LeagueSharp.SDK.Core.Wrappers.Damages;

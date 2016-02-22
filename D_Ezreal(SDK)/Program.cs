@@ -10,9 +10,7 @@ using LeagueSharp.SDK.Core.Utils;
 namespace D_Ezreal_SDK_
 {
     using System.Linq;
-
-    using D_Ezreal_SDK_.Modes;
-
+    
     internal static class Program
     {
         internal static bool UseQ;
@@ -62,7 +60,7 @@ namespace D_Ezreal_SDK_
                             SpellManager.W.IsReady() ? (float)unit.GetWDamage() : 0f,
                             () => Config.Modes.Drawings.DrawWDamage),
                         new DamageIndicator.DamageInfo(
-                            "E",
+                            "R",
                             () => Config.Modes.Drawings.RDamageColor,
                             unit =>
                             SpellManager.R.IsReady() ? (float)unit.GetRDamage() : 0f,

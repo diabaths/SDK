@@ -5,10 +5,13 @@ using LeagueSharp.SDK.Core.Wrappers.Damages;
 
 namespace D_Ezreal_SDK_
 {
-    using System.Linq;
-
     internal static class Extensions
     {
+        internal static bool haveW(this Obj_AI_Base target, bool rangeCheck = true)
+        {
+            return target.HasBuff("caitlynyordletrapinternal");
+        }
+
         internal static bool canttack(this Obj_AI_Base hero)
         {
             return hero.IsMe && hero.CanAttack;

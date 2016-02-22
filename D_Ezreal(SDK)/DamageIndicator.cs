@@ -86,7 +86,6 @@ namespace D_Ezreal_SDK_
             _damageInfoList = damageInfoList;
             _enabled = enabled;
             _herosEnabled = herosEnabled;
-          
         }
 
         private static void Drawing_OnDraw(EventArgs args)
