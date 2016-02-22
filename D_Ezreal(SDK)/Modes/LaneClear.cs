@@ -6,9 +6,6 @@ using Settings = D_Ezreal_SDK_.Config.Modes.LaneClear;
 
 namespace D_Ezreal_SDK_.Modes
 {
-    using System.Security.Cryptography.X509Certificates;
-
-    using LeagueSharp.SDK.Core.Utils;
     using LeagueSharp.SDK.Core.Wrappers.Damages;
 
     internal sealed class LaneClear : ModeBase
