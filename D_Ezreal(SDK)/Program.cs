@@ -20,6 +20,7 @@ namespace D_Ezreal_SDK_
         internal const int  IgniteRange = 600;
         internal static SpellSlot  Ignite;
         internal static Obj_AI_Hero Player;
+
         private const string ChampName = "Ezreal";
 
         internal static void Main(string[] args)
@@ -72,19 +73,18 @@ namespace D_Ezreal_SDK_
 
             Drawing.OnDraw += Drawing_OnDraw;
             Game.OnUpdate += OnUpdate;
-
             Variables.Orbwalker.OnAction += Orbwalker_OnAction;
             Logging.Write()(LogLevel.Info, "D-Ezreal Loaded successfully!");
 
             Notifications.Add(
-                new Notification("D-Ezreal Loaded!", "D-Ezreal was loaded!", "tnxkkbb!")
+                new Notification("D-Ezreal Loaded!", "Enjoy the Free elo Tnxkkbb!")
                     {
                         HeaderTextColor =
                             SharpDX.Color
-                            .LightBlue,
+                            .MediumOrchid,
                         BodyTextColor =
                             SharpDX.Color
-                            .White,
+                            .BlanchedAlmond,
                         Icon =
                             NotificationIconType
                             .Check,
@@ -165,10 +165,6 @@ namespace D_Ezreal_SDK_
             if (!e.Sender?.IsMe == false)
             {
                 return;
-            }
-            if (Variables.Orbwalker.GetActiveMode() == OrbwalkingMode.LaneClear && e.Type == OrbwalkingType.AfterAttack)
-            {
-                UseQ = true;
             }
             if (Variables.Orbwalker.GetActiveMode() == OrbwalkingMode.Combo && e.Type == OrbwalkingType.BeforeAttack
                 && Items.HasItem(3042) && Items.CanUseItem(3042) && Config.Modes.Items.Offensive.usemuramana
