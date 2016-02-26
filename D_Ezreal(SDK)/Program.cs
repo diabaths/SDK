@@ -71,7 +71,6 @@ namespace D_Ezreal_SDK_
 
             Drawing.OnDraw += Drawing_OnDraw;
             Game.OnUpdate += OnUpdate;
-            Variables.Orbwalker.OnAction += Orbwalker_OnAction;
             Logging.Write()(LogLevel.Info, "D-Ezreal Loaded successfully!");
 
             Notifications.Add(
@@ -158,32 +157,7 @@ namespace D_Ezreal_SDK_
             }
         }
 
-        private static void Orbwalker_OnAction(object sender, OrbwalkingActionArgs e)
-        {
-            if (!e.Sender?.IsMe == false)
-            {
-                return;
-            }
-            if (Variables.Orbwalker.GetActiveMode() == OrbwalkingMode.Combo && e.Type == OrbwalkingType.BeforeAttack
-                && Items.HasItem(3042) && Items.CanUseItem(3042) && Config.Modes.Items.Offensive.usemuramana
-                && GameObjects.Player.Buffs.Count(buf => buf.Name == "Muramana") == 0
-                && Environment.TickCount - usemuranama > 350)
-            {
-                if (GameObjects.Player.ManaPercent > Config.Modes.Items.Offensive.muramanamin) Items.UseItem(3042);
-                usemuranama = Environment.TickCount;
-            }
-            else if (Items.HasItem(3042) && Items.CanUseItem(3042)
-                     && GameObjects.Player.Buffs.Count(buf => buf.Name == "Muramana") == 1
-                     && Environment.TickCount - usemuranama > 350
-                     && (GameObjects.Player.ManaPercent < Config.Modes.Items.Offensive.muramanamin
-                         || Variables.Orbwalker.GetActiveMode() != OrbwalkingMode.Combo))
-            {
-                Items.UseItem(3042);
-                usemuranama = Environment.TickCount;
-            }
-        }
-        
-
+      
         //need to fix it!!!
         /*public static void Gapcloser_OnGapCloser(object sender, GapcloserEventArgs gapcloser)
             {

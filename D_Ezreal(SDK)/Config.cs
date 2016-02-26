@@ -290,10 +290,6 @@ namespace D_Ezreal_SDK_
 
                     internal static readonly Menu Menu;
 
-                    private static readonly MenuBool _usemuramana;
-
-                    private static readonly MenuSliderButton _muramanamin;
-
                     private static readonly MenuBool _Youmuu;
 
                     private static readonly MenuBool _Blade;
@@ -305,10 +301,6 @@ namespace D_Ezreal_SDK_
                     private static readonly MenuBool _Hextech;
 
                     private static readonly MenuSliderButton _HextechEnemyhp;
-
-                    internal static bool usemuramana => _usemuramana.Value;
-
-                    internal static int muramanamin => _muramanamin.SValue;
 
                     internal static bool Youmuu => _Youmuu.Value;
 
@@ -326,15 +318,6 @@ namespace D_Ezreal_SDK_
                     {
                         Menu = Items.Menu.Add(new Menu("Offensive", "Offensive"));
 
-                        _usemuramana = Menu.Add(new MenuBool("usemuramana", "Use Muramana", true));
-                        _muramanamin =
-                            Menu.Add(
-                                new MenuSliderButton("muramanamin", "Use Muramana until MP < %", 20, 0, 100, true)
-                                    {
-                                        BValue
-                                            =
-                                            true
-                                    });
                         _Youmuu = Menu.Add(new MenuBool("Youmuu", "Use Youmuu's", true));
                         _Blade = Menu.Add(new MenuBool("Blade", "Use Bilge/Blade", true));
                         _BladeEnemyhp =

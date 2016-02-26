@@ -374,8 +374,6 @@
 
                 private static readonly MenuBool _useRM;
 
-                private static readonly MenuBool _useQdash;
-
                 private static readonly MenuBool _useQimmo;
 
                 private static readonly MenuBool _Gap_E;
@@ -388,8 +386,6 @@
 
                 internal static bool useQK => _useQK.Value;
 
-                internal static bool useQdash => _useQdash.Value;
-
                 internal static bool useQimmo => _useQimmo.Value;
 
                 internal static bool Gap_E => _Gap_E.Value;
@@ -400,7 +396,6 @@
                     Menu = Config.Menu.Add(new Menu("Misc", "Misc"));
                     _emouse = Menu.Add(new MenuKeyBind("emouse", "Dash to Mouse Position", System.Windows.Forms.Keys.T, KeyBindType.Press));
                     _useQK = Menu.Add(new MenuBool("useQK", "Use Q to Killsteal", true));
-                    _useQdash = Menu.Add(new MenuBool("useQdash", "Auto Q dashing", true));
                     _useQimmo = Menu.Add(new MenuBool("useQimmo", "Auto Q Immobile", true));
                     _autoq = Menu.Add(new MenuBool("autoq", "Auto Q if enemy is trapped", true));
                     _usews = Menu.Add(new MenuBool("usews", "Auto W if enemy have stun slow", true));
