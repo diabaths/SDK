@@ -116,6 +116,8 @@
 
                 internal static int Ignitehealth => _Ignitehealth.Value;
 
+                internal static readonly MenuKeyBind _semiR;
+
                 static Combo()
                 {
                     Menu = Modes.Menu.Add(new Menu("Combo", "Combo"));
@@ -129,8 +131,9 @@
                     _useQ = Menu.Add(new MenuBool("UseQ", "Use Q", true));
                     _useW = Menu.Add(new MenuBool("UseW", "Use W", true));
                     _useE = Menu.Add(new MenuBool("UseE", "Use E", true));
-                    _useR = Menu.Add(new MenuBool("UseR", "Use R", true));
-                 
+                    _useR = Menu.Add(new MenuBool("UseR", "Use R(only if 1 enemy in R range)", true));
+                    _semiR = Menu.Add(new MenuKeyBind("semiR", "Semi Auto R", System.Windows.Forms.Keys.R, KeyBindType.Press));
+                    
                 }
 
                 internal static void Initialize()

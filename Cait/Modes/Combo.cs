@@ -108,6 +108,13 @@ namespace Cait.Modes
                                     Speed = W.Speed,
                                     Range = W.Range
                                 });
+                    if (target.IsMelee && target.IsFacing(GameObjects.Player) && target.DistanceToPlayer() < 250)
+                    {
+                        W.Cast(GameObjects.Player);
+                        castR = Environment.TickCount;
+                        castW = Environment.TickCount;
+                    }
+
                     if (prediction.Hitchance >= HitChance.High && target.IsFacing(GameObjects.Player)
                         && Environment.TickCount - castW > 1000)
                     {
@@ -163,16 +170,19 @@ namespace Cait.Modes
                 }
             }
 
-            if (R.IsReady() && Settings.UseR && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)) && Environment.TickCount - castR > 700)
+            if (R.IsReady() && Settings.UseR && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true))
+                && Environment.TickCount - castR > 700)
             {
                 var target = Variables.TargetSelector.GetTarget(R);
                 if (target != null)
                 {
+                    if (Settings._semiR.Active && target.DistanceToPlayer() > target.GetRealAutoAttackRange())
                     {
-                        if (!target.IsDead
-                            && target.DistanceToPlayer() > target.GetRealAutoAttackRange()
-                            && GameObjects.Player.CountEnemyHeroesInRange(R.Range) <= 1) R.Cast(target);
+                        R.Cast(target);
                     }
+
+                    if (!target.IsDead && target.DistanceToPlayer() > target.GetRealAutoAttackRange()
+                        && GameObjects.Player.CountEnemyHeroesInRange(R.Range) <= 1) R.Cast(target);
                 }
             }
         }
