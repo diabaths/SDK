@@ -115,7 +115,7 @@ namespace Cait.Modes
                         castW = Environment.TickCount;
                     }
 
-                    if (prediction.Hitchance >= HitChance.High && target.IsFacing(GameObjects.Player)
+                    if (prediction.Hitchance >= HitChance.VeryHigh && target.IsFacing(GameObjects.Player)
                         && Environment.TickCount - castW > 1000)
                     {
                         W.Cast(prediction.CastPosition);
@@ -170,22 +170,22 @@ namespace Cait.Modes
                 }
             }
 
-            if (R.IsReady() && Settings.UseR && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true))
-                && Environment.TickCount - castR > 700)
+            if (R.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)))
             {
                 var target = Variables.TargetSelector.GetTarget(R);
-                if (target != null)
-                {
-                    if (Settings._semiR.Active && target.DistanceToPlayer() > target.GetRealAutoAttackRange())
-                    {
-                        R.Cast(target);
-                    }
 
-                    if (!target.IsDead && target.DistanceToPlayer() > target.GetRealAutoAttackRange()
-                        && GameObjects.Player.CountEnemyHeroesInRange(R.Range) <= 1) R.Cast(target);
+                if (target.IsValidTarget(R.Range) && Settings._semiR.Active
+                    && target.DistanceToPlayer() > target.GetRealAutoAttackRange())
+                {
+                    R.Cast(target);
                 }
+
+                if (target.IsValidTarget(R.Range) && Settings.UseR && !target.IsDead
+                    && target.DistanceToPlayer() > target.GetRealAutoAttackRange()
+                    && GameObjects.Player.CountEnemyHeroesInRange(R.Range) <= 1 && Environment.TickCount - castR > 700) R.Cast(target);
             }
         }
     }
 }
+
 
