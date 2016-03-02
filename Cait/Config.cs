@@ -1,5 +1,6 @@
 ﻿namespace Cait
 {
+    using LeagueSharp;
     using LeagueSharp.SDK;
     using LeagueSharp.SDK.Core.UI.IMenu;
     using LeagueSharp.SDK.Core.UI.IMenu.Values;
@@ -171,15 +172,18 @@
                 internal static readonly Menu Menu;
                 private static readonly MenuBool _useQ;
                 private static readonly MenuSliderButton _minMana;
+                private static readonly MenuSliderButton _minions;
 
                 internal static bool UseQ => _useQ.Value;
                 internal static int MinMana => _minMana.Value;
+                internal static int minions => _minions.Value;
 
                 static LaneClear()
                 {
                     Menu = Modes.Menu.Add(new Menu("LaneClear", "LaneClear"));
 
                     _useQ = Menu.Add(new MenuBool("UseQ", "Use Q", true));
+                    _minions = Menu.Add(new MenuSliderButton("Minions", "Use Q is Hit X Minion >= ", 2, 1, 5) { BValue = true });
                     _minMana = Menu.Add(new MenuSliderButton("MinMana", "Min Mana %", 70, 0, 100) { BValue = true });
                 }
 

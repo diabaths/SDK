@@ -6,6 +6,10 @@ using Settings = Cait.Config.Modes.LaneClear;
 
 namespace Cait.Modes
 {
+    using System.Collections.Generic;
+
+    using SharpDX;
+
     internal sealed class LaneClear : ModeBase
     {
         internal override bool ShouldBeExecuted()
@@ -20,18 +24,19 @@ namespace Cait.Modes
                 foreach (var minion in GameObjects.EnemyMinions.Where(x => x.IsValidTarget(Q.Range)))
                 {
                     var prediction = Q.GetPrediction(minion);
-                    
-                    var killcount = 0;
 
-                    foreach (var collisionMinion in prediction.CollisionObjects.OrderBy(x => x.IsKillableWithQ(true)))
+                    var collision = Q.GetCollision(
+                        (Vector2)GameObjects.Player.Position,
+                        new List<Vector2> { (Vector2)prediction.UnitPosition });
+                    foreach (var collisions in collision)
                     {
-                        if (collisionMinion.IsKillableWithQ())
+                        if (collision.Count() >= Settings.minions)
                         {
-                            killcount++;
+                            if (collision.Last().Distance(GameObjects.Player.Position)
+                                - collision[0].Distance(GameObjects.Player.Position) < 600
+                                && collision[0].Distance(GameObjects.Player.Position) < 500) Q.Cast(collisions);
                         }
                     }
-                    if (killcount >= 1) Q.Cast(prediction.CastPosition);
-
                 }
             }
         }
