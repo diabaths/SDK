@@ -85,7 +85,7 @@ namespace Cait.Modes
                                     Range = W.Range
                                 });
                     if (prediction.Hitchance >= HitChance.High
-                        && (target.HasBuffOfType(BuffType.Stun) || target.HasBuffOfType(BuffType.Slow) || target.HasBuffOfType(BuffType.Knockup)))
+                        && (target.HasBuffOfType(BuffType.Stun) || target.HasBuffOfType(BuffType.Snare) || target.HasBuffOfType(BuffType.Knockup)))
                     {
                         W.Cast(prediction.CastPosition);
                         Modes.Combo.castR = Environment.TickCount;
