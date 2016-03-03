@@ -116,8 +116,7 @@
                 internal static bool UseR => _useR.Value;
 
                 internal static int Ignitehealth => _Ignitehealth.Value;
-
-                internal static readonly MenuKeyBind _semiR;
+               
 
                 static Combo()
                 {
@@ -133,8 +132,7 @@
                     _useW = Menu.Add(new MenuBool("UseW", "Use W", true));
                     _useE = Menu.Add(new MenuBool("UseE", "Use E", true));
                     _useR = Menu.Add(new MenuBool("UseR", "Use R(only if 1 enemy in R range)", true));
-                    _semiR = Menu.Add(new MenuKeyBind("semiR", "Semi Auto R", System.Windows.Forms.Keys.R, KeyBindType.Press));
-                    
+                     
                 }
 
                 internal static void Initialize()
@@ -397,6 +395,8 @@
 
                 internal static bool Gap_E => _Gap_E.Value;
 
+                internal static readonly MenuKeyBind _semiR;
+
 
                 static Misc()
                 {
@@ -406,7 +406,8 @@
                     _useQimmo = Menu.Add(new MenuBool("useQimmo", "Auto Q Immobile", true));
                     _autoq = Menu.Add(new MenuBool("autoq", "Auto Q if enemy is trapped", true));
                     _usews = Menu.Add(new MenuBool("usews", "Auto W if enemy have stun slow", true));
-                    _useRM = Menu.Add(new MenuBool("useRM", "Use R to Killsteal", true));
+                    _useRM = Menu.Add(new MenuBool("useRM", "Use R to Killsteal(if  Count 1 enemy in range)", true));
+                    _semiR = Menu.Add(new MenuKeyBind("semiR", "Semi Auto R", System.Windows.Forms.Keys.R, KeyBindType.Press));
                     _Gap_E = Menu.Add(new MenuBool("Gap_E", "Use E to Gapcloser", true));
                 }
 

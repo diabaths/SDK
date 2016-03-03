@@ -148,7 +148,11 @@ namespace Cait.Modes
 
                     if (target.IsValidTarget(1200) && GameObjects.Player.CountEnemyHeroesInRange(2000) <= 1)
                     {
-                        if (GameObjects.EnemyHeroes.Any(x => x.IsKillableWithauto(true))
+                        if (
+                            GameObjects.EnemyHeroes.Any(
+                                x =>
+                                x.IsKillableWithauto(true)
+                                && target.DistanceToPlayer() > Program.Player.GetRealAutoAttackRange())
                             && !target.IsFacing(GameObjects.Player))
                         {
                             E.Cast(GameObjects.Player.Position.Extend(Game.CursorPos, -(E.Range / 2)));
@@ -157,16 +161,10 @@ namespace Cait.Modes
                 }
             }
 
-            if (R.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)))
+            if (R.IsReady())
             {
                 var target = Variables.TargetSelector.GetTarget(R);
-
-                if (target.IsValidTarget(R.Range) && Settings._semiR.Active
-                    && target.DistanceToPlayer() > Program.Player.GetRealAutoAttackRange())
-                {
-                    R.Cast(target);
-                }
-
+                if (GameObjects.EnemyHeroes.Any(x => !x.IsKillableWithR(true))) return;
                 if (target.IsValidTarget(R.Range) && Settings.UseR && !target.IsDead
                     && target.DistanceToPlayer() > Program.Player.GetRealAutoAttackRange()
                     && GameObjects.Player.CountEnemyHeroesInRange(R.Range) <= 1 && Environment.TickCount - castR > 700) R.Cast(target);

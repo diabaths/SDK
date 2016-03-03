@@ -99,6 +99,12 @@ namespace Cait.Modes
                 var target = Variables.TargetSelector.GetTarget(R.Range);
                 if (target != null)
                 {
+                    if (target.IsValidTarget(R.Range) && Settings._semiR.Active
+                        && target.DistanceToPlayer() > Program.Player.GetRealAutoAttackRange())
+                    {
+                        R.Cast(target);
+                    }
+
                     if (GameObjects.Player.CountEnemyHeroesInRange(R.Range) > 1) return;
                     if (Q.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQ(true))
                         && target.IsValidTarget(Q.Range)) return;
