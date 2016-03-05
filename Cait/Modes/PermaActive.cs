@@ -24,6 +24,7 @@ namespace Cait.Modes
             if (E.IsReady() && Settings._emouse.Active)
             {
                 E.Cast(GameObjects.Player.Position.Extend(Game.CursorPos, -(E.Range / 2)));
+               GameObjects.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
             }
 
             if (Q.IsReady())
@@ -85,7 +86,8 @@ namespace Cait.Modes
                                     Range = W.Range
                                 });
                     if (prediction.Hitchance >= HitChance.High
-                        && (target.HasBuffOfType(BuffType.Stun) || target.HasBuffOfType(BuffType.Snare) || target.HasBuffOfType(BuffType.Knockup)))
+                        && (target.HasBuffOfType(BuffType.Suppression) && target.HasBuffOfType(BuffType.Stun)
+                            || target.HasBuffOfType(BuffType.Snare) || target.HasBuffOfType(BuffType.Knockup)))
                     {
                         W.Cast(prediction.CastPosition);
                         Modes.Combo.castR = Environment.TickCount;
