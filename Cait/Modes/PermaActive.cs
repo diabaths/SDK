@@ -8,7 +8,6 @@ using Settings = Cait.Config.Modes.Misc;
 namespace Cait.Modes
 {
     using System;
-
     using LeagueSharp;
     using LeagueSharp.SDK.Core.Wrappers.Damages;
 
