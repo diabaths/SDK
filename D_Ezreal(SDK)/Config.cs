@@ -104,7 +104,11 @@ namespace D_Ezreal_SDK_
                 private static readonly MenuBool _useW;
 
                 private static readonly MenuBool _useR;
-                
+
+                private static readonly MenuBool _userr;
+
+                private static readonly MenuSliderButton _Usermin;
+
                 private static readonly MenuSliderButton _minrange;
 
                 private static readonly MenuSliderButton _Ignitehealth;
@@ -117,7 +121,11 @@ namespace D_Ezreal_SDK_
 
                 internal static bool UseR => _useR.Value;
 
+                internal static bool Userr => _userr.Value;
+
                 internal static int Minrange => _minrange.Value;
+
+                internal static int Usermin => _Usermin.Value;
 
                 internal static int Ignitehealth => _Ignitehealth.Value;
 
@@ -136,6 +144,9 @@ namespace D_Ezreal_SDK_
                     _useR = Menu.Add(new MenuBool("UseR", "Use R", true));
                     _minrange =
                         Menu.Add(new MenuSliderButton("Minrange", "Min Range to Use R", 700, 0, 1500) { BValue = true });
+                    _userr = Menu.Add(new MenuBool("userr", "Use R if will hit x Targets", false));
+                    _Usermin =
+                       Menu.Add(new MenuSliderButton("Usermin", "Use R if will hit > ", 2, 1, 3) { BValue = true });
                 }
 
                 internal static void Initialize()
