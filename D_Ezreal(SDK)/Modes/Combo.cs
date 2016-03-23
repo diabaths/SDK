@@ -110,6 +110,27 @@ namespace D_Ezreal_SDK_.Modes
                 }
             }
 
+            if (Settings.Userr && Environment.TickCount - castR > 500)
+            {
+                var target = Variables.TargetSelector.GetTarget(R);
+                if (target != null)
+                {
+                    var prediction =
+                        Movement.GetPrediction(
+                            new PredictionInput
+                                {
+                                    Unit = target,
+                                    Delay = R.Delay,
+                                    Radius = R.Width,
+                                    Speed = R.Speed,
+                                    Range = R.Range
+                                });
+                    var fuckr = Q.GetPrediction(target, true);
+                    if (fuckr.AoeTargetsHitCount >= Settings.Usermin && prediction.Hitchance >= HitChance.High
+                        && target.DistanceToPlayer() > Settings.Minrange) R.Cast(prediction.CastPosition);
+                }
+            }
+
             if (R.IsReady() && Settings.UseR && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)))
             {
                 var target = Variables.TargetSelector.GetTarget(R);
@@ -127,12 +148,6 @@ namespace D_Ezreal_SDK_.Modes
                                 });
 
                     {
-                        if (Settings.Userr && Environment.TickCount - castR > 500)
-                        {
-                            var fuckr = Q.GetPrediction(target, true);
-                            if (fuckr.AoeTargetsHitCount >= Settings.Usermin && prediction.Hitchance >= HitChance.High
-                                && target.DistanceToPlayer() > Settings.Minrange) R.Cast(prediction.CastPosition);
-                        }
                         if (Q.IsReady() && W.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQW(true))
                             && target.IsValidTarget(Q.Range)) return;
                         if (Q.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQ(true))
