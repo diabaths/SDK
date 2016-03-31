@@ -146,7 +146,7 @@ namespace D_Ezreal_SDK_
                         Menu.Add(new MenuSliderButton("Minrange", "Min Range to Use R", 700, 0, 1500) { BValue = true });
                     _userr = Menu.Add(new MenuBool("userr", "Use R if will hit x Targets", false));
                     _Usermin =
-                       Menu.Add(new MenuSliderButton("Usermin", "Use R if will hit > ", 2, 1, 3) { BValue = true });
+                       Menu.Add(new MenuSliderButton("Usermin", "Use R if will hit > ", 3, 1, 5) { BValue = true });
                 }
 
                 internal static void Initialize()
