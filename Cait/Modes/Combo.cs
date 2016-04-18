@@ -139,7 +139,7 @@ namespace Cait.Modes
                 var target = Variables.TargetSelector.GetTarget(1200);
                 if (target != null)
                 {
-                    if (target.IsValidTarget(250))
+                    if (target.IsValidTarget(350))
                     {
                         E.Cast(target);
                         if (Q.IsReady()) DelayAction.Add(250, () => Q.Cast(Q.GetPrediction(target).CastPosition));

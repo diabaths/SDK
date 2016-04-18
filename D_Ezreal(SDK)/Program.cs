@@ -10,13 +10,17 @@ using LeagueSharp.SDK.Core.Utils;
 namespace D_Ezreal_SDK_
 {
     using System.Linq;
-    
+
     internal static class Program
     {
         internal static bool UseQ;
+
         private static int usemuranama;
-        internal const int  IgniteRange = 600;
-        internal static SpellSlot  Ignite;
+
+        internal const int IgniteRange = 600;
+
+        internal static SpellSlot Ignite;
+
         internal static Obj_AI_Hero Player;
 
         private const string ChampName = "Ezreal";
@@ -71,20 +75,18 @@ namespace D_Ezreal_SDK_
 
             Drawing.OnDraw += Drawing_OnDraw;
             Game.OnUpdate += OnUpdate;
+            Events.OnGapCloser += OnGapCloser;
             Logging.Write()(LogLevel.Info, "D-Ezreal Loaded successfully!");
 
             Notifications.Add(
                 new Notification("D-Ezreal Loaded!", "Enjoy the Free elo Tnxkkbb!")
                     {
                         HeaderTextColor =
-                            SharpDX.Color
-                            .MediumOrchid,
+                            SharpDX.Color.MediumOrchid,
                         BodyTextColor =
-                            SharpDX.Color
-                            .BlanchedAlmond,
+                            SharpDX.Color.BlanchedAlmond,
                         Icon =
-                            NotificationIconType
-                            .Check,
+                            NotificationIconType.Check,
                         IconFlash = true
                     });
         }
@@ -94,9 +96,23 @@ namespace D_Ezreal_SDK_
             usepotion();
         }
 
+        private static void OnGapCloser(object oSender, Events.GapCloserEventArgs args)
+        {
+            var sender = args.Sender;
+            if (Config.Modes.Misc.Gap_E && sender.Distance(GameObjects.Player.ServerPosition) <= 250)
+            {
+                if (args.IsDirectedToPlayer)
+                {
+                    if (SpellManager.E.IsReady())
+                    {
+                        SpellManager.E.Cast(Player.Position.Extend(sender.Position, -SpellManager.E.Range));
+                    }
+                }
+            }
+        }
+
         private static void usepotion()
         {
-
             if (GameObjects.Player.InFountain() || GameObjects.Player.HasBuff("Recall")) return;
             if (GameObjects.Player.CountEnemyHeroesInRange(800) > 0)
             {
@@ -108,28 +124,32 @@ namespace D_Ezreal_SDK_
                          || GameObjects.Player.HasBuff("ItemCrystalFlaskJungle")
                          || GameObjects.Player.HasBuff("ItemDarkCrystalFlask")))
                 {
-
                     if (Items.HasItem(2010) && Items.CanUseItem(2010))
                     {
                         Items.UseItem(2010);
                     }
+
                     if (Items.HasItem(2003) && Items.CanUseItem(2003))
                     {
                         Items.UseItem(2003);
                     }
+
                     if (Items.HasItem(2031) && Items.CanUseItem(2031))
                     {
                         Items.UseItem(2031);
                     }
+
                     if (Items.HasItem(2032) && Items.CanUseItem(2032))
                     {
                         Items.UseItem(2032);
                     }
+
                     if (Items.HasItem(2033) && Items.CanUseItem(2033))
                     {
                         Items.UseItem(2033);
                     }
                 }
+
                 if (Config.Modes.Items.Potions.UseMPpotion
                     && GameObjects.Player.ManaPercent < Config.Modes.Items.Potions.MinMP
                     && !(GameObjects.Player.HasBuff("ItemDarkCrystalFlask")
@@ -141,14 +161,17 @@ namespace D_Ezreal_SDK_
                     {
                         Items.UseItem(2041);
                     }
+
                     if (Items.HasItem(2010) && Items.CanUseItem(2010))
                     {
                         Items.UseItem(2010);
                     }
+
                     if (Items.HasItem(2032) && Items.CanUseItem(2032))
                     {
                         Items.UseItem(2032);
                     }
+
                     if (Items.HasItem(2033) && Items.CanUseItem(2033))
                     {
                         Items.UseItem(2033);
@@ -157,22 +180,7 @@ namespace D_Ezreal_SDK_
             }
         }
 
-      
-        //need to fix it!!!
-        /*public static void Gapcloser_OnGapCloser(object sender, GapcloserEventArgs gapcloser)
-            {
-                string[] herogapcloser =
-                {
-                    "Braum", "Ekko", "Elise", "Fiora", "Kindred", "Lucian", "Yi", "Nidalee", "Quinn", "Riven", "Shaco", "Sion", "Vayne", "Yasuo", "Graves", "Azir", "Gnar", "Irelia", "Kalista"
-                };
-                if (sender.IsEnemy && sender.GetAutoAttackRange() >= ObjectManager.Player.Distance(gapcloser.End) && !herogapcloser.Any(sender.ChampionName.Contains))
-                {
-                    var diffGapCloser = gapcloser.End - gapcloser.Start;
-                    SpellManager.E.Cast(ObjectManager.Player.ServerPosition + diffGapCloser);
-                }
-            }*/
-               private static
-               void Drawing_OnDraw(EventArgs args)
+        private static void Drawing_OnDraw(EventArgs args)
         {
             if (Config.Modes.Drawings.DrawQRange)
             {

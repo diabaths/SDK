@@ -68,6 +68,7 @@
 
             Drawing.OnDraw += Drawing_OnDraw;
             Game.OnUpdate += OnUpdate;
+            Events.OnGapCloser += OnGapCloser;
             Logging.Write()(LogLevel.Info, "D-Caitlyn Loaded successfully!");
 
             Notifications.Add(
@@ -92,7 +93,22 @@
             usepotion();
         }
 
-    private static void usepotion()
+        private static void OnGapCloser(object oSender, Events.GapCloserEventArgs args)
+        {
+            var sender = args.Sender;
+            if (Config.Modes.Misc.Gap_E && sender.Distance(GameObjects.Player.ServerPosition) <= 250)
+            {
+                if (args.IsDirectedToPlayer)
+                {
+                    if (SpellManager.E.IsReady())
+                    {
+                        SpellManager.E.Cast(sender.ServerPosition);
+                    }
+                }
+            }
+        }
+
+        private static void usepotion()
         {
             if (GameObjects.Player.InFountain() || GameObjects.Player.HasBuff("Recall")) return;
             if (GameObjects.Player.CountEnemyHeroesInRange(800) > 0)
