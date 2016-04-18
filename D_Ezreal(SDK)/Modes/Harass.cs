@@ -24,47 +24,52 @@ namespace D_Ezreal_SDK_.Modes
             {
                 return;
             }
-
-            if (Settings.UseQ && Q.IsReady() && GameObjects.Player.ManaPercent > Settings.Mana)
+            var targetList =
+                Variables.TargetSelector.GetTargets(Q.Range, Q.DamageType).Where(i => Settings.Useha).ToList();
+            if (targetList.Count > 0)
             {
-                var target = Variables.TargetSelector.GetTarget(Q);
-                if (target != null)
+                if (Settings.UseQ && Q.IsReady() && GameObjects.Player.ManaPercent > Settings.Mana)
                 {
-                    var prediction =
-                        Movement.GetPrediction(
-                            new PredictionInput
-                                {
-                                    Unit = target,
-                                    Delay = Q.Delay,
-                                    Radius = Q.Width,
-                                    Speed = Q.Speed,
-                                    Range = Q.Range
-                                });
-                    if (prediction.Hitchance >= HitChance.High && Q.GetPrediction(target).CollisionObjects.Count == 0)
+                    var target = Variables.TargetSelector.GetTarget(Q);
+                    if (target != null)
                     {
-                        Q.Cast(prediction.CastPosition);
+                        var prediction =
+                            Movement.GetPrediction(
+                                new PredictionInput
+                                    {
+                                        Unit = target,
+                                        Delay = Q.Delay,
+                                        Radius = Q.Width,
+                                        Speed = Q.Speed,
+                                        Range = Q.Range
+                                    });
+                        if (prediction.Hitchance >= HitChance.High
+                            && Q.GetPrediction(target).CollisionObjects.Count == 0)
+                        {
+                            Q.Cast(prediction.CastPosition);
+                        }
                     }
                 }
-            }
 
-            if (Settings.UseW && W.IsReady() && GameObjects.Player.ManaPercent > Settings.Mana)
-            {
-                var target = Variables.TargetSelector.GetTarget(W);
-                if (target != null)
+                if (Settings.UseW && W.IsReady() && GameObjects.Player.ManaPercent > Settings.Mana)
                 {
-                    var prediction =
-                        Movement.GetPrediction(
-                            new PredictionInput
-                            {
-                                Unit = target,
-                                Delay = W.Delay,
-                                Radius = W.Width,
-                                Speed = W.Speed,
-                                Range = W.Range
-                            });
-                    if (prediction.Hitchance >= HitChance.High)
+                    var target = Variables.TargetSelector.GetTarget(W);
+                    if (target != null)
                     {
-                        W.Cast(prediction.CastPosition);
+                        var prediction =
+                            Movement.GetPrediction(
+                                new PredictionInput
+                                    {
+                                        Unit = target,
+                                        Delay = W.Delay,
+                                        Radius = W.Width,
+                                        Speed = W.Speed,
+                                        Range = W.Range
+                                    });
+                        if (prediction.Hitchance >= HitChance.High)
+                        {
+                            W.Cast(prediction.CastPosition);
+                        }
                     }
                 }
             }

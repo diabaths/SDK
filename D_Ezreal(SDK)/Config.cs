@@ -162,11 +162,15 @@ namespace D_Ezreal_SDK_
 
                 private static readonly MenuBool _useW;
 
+                private static  MenuBool _useHa;
+
                 private static readonly MenuSliderButton _minMana;
 
                 internal static bool UseQ => _useQ.Value;
 
                 internal static bool UseW => _useW.Value;
+
+                internal static bool Useha => _useHa.Value;
 
                 internal static int Mana => _minMana.Value;
 
@@ -176,6 +180,11 @@ namespace D_Ezreal_SDK_
 
                     _useQ = Menu.Add(new MenuBool("UseQ", "Use Q", true));
                     _useW = Menu.Add(new MenuBool("UseW", "Use W", true));
+                    if (GameObjects.EnemyHeroes.Any())
+                    {
+                        GameObjects.EnemyHeroes.ForEach(
+                            i => _useHa = Menu.Add(new MenuBool("RCast" + i.ChampionName, "Cast On " + i.ChampionName, false)));
+                    }
                     _minMana = Menu.Add(new MenuSliderButton("Mana", "Min Mana %", 70, 0, 100) { BValue = true });
                 }
 
