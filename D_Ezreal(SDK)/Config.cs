@@ -183,7 +183,7 @@ namespace D_Ezreal_SDK_
                     if (GameObjects.EnemyHeroes.Any())
                     {
                         GameObjects.EnemyHeroes.ForEach(
-                            i => _useHa = Menu.Add(new MenuBool("RCast" + i.ChampionName, "Cast On " + i.ChampionName, false)));
+                            i => _useHa = Menu.Add(new MenuBool("RHar" + i.ChampionName, "Use Harass On " + i.ChampionName, false)));
                     }
                     _minMana = Menu.Add(new MenuSliderButton("Mana", "Min Mana %", 70, 0, 100) { BValue = true });
                 }
