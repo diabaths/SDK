@@ -180,11 +180,11 @@ namespace D_Ezreal_SDK_
 
                     _useQ = Menu.Add(new MenuBool("UseQ", "Use Q", true));
                     _useW = Menu.Add(new MenuBool("UseW", "Use W", true));
-                    if (GameObjects.EnemyHeroes.Any())
+                   /* if (GameObjects.EnemyHeroes.Any())
                     {
                         GameObjects.EnemyHeroes.ForEach(
                             i => _useHa = Menu.Add(new MenuBool("RHar" + i.ChampionName, "Use Harass On " + i.ChampionName, false)));
-                    }
+                    }*/
                     _minMana = Menu.Add(new MenuSliderButton("Mana", "Min Mana %", 70, 0, 100) { BValue = true });
                 }
 
