@@ -1,13 +1,13 @@
-﻿namespace Cait
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+
+using LeagueSharp;
+using LeagueSharp.SDK;
+
+namespace Cait
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Drawing;
-    using System.Linq;
-
-    using LeagueSharp;
-    using LeagueSharp.SDK;
-
     internal static class DamageIndicator
     {
         internal class DamageInfo

@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 
 using LeagueSharp.SDK;
-using LeagueSharp.SDK.Core.Utils;
 
 using Settings = Cait.Config.Modes.Misc;
 
@@ -9,7 +8,8 @@ namespace Cait.Modes
 {
     using System;
     using LeagueSharp;
-    using LeagueSharp.SDK.Core.Wrappers.Damages;
+    using LeagueSharp.SDK.Enumerations;
+    using LeagueSharp.SDK.Utils;
 
     internal sealed class PermaActive : ModeBase
     {
@@ -20,7 +20,7 @@ namespace Cait.Modes
 
         internal override void Execute()
         {
-            if (E.IsReady() && Settings._emouse.Active)
+            if (E.IsReady() && Settings._emouse)
             {
                 E.Cast(GameObjects.Player.Position.Extend(Game.CursorPos, -(E.Range / 2)));
                GameObjects.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
@@ -100,7 +100,7 @@ namespace Cait.Modes
                 var target = Variables.TargetSelector.GetTarget(R.Range);
                 if (target != null)
                 {
-                    if (target.IsValidTarget(R.Range) && Settings._semiR.Active
+                    if (target.IsValidTarget(R.Range) && Settings._semiR
                         && target.DistanceToPlayer() > Program.Player.GetRealAutoAttackRange())
                     {
                         R.Cast(target);

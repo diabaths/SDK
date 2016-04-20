@@ -3,6 +3,9 @@ using LeagueSharp.SDK;
 
 namespace Cait
 {
+    using LeagueSharp.Data.Enumerations;
+    using LeagueSharp.SDK.Enumerations;
+
     internal static class SpellManager
     {
         internal static readonly Spell Q, W, E, R;

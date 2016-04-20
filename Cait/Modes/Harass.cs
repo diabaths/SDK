@@ -1,6 +1,6 @@
 ﻿
 using LeagueSharp.SDK;
-
+using LeagueSharp.SDK.Enumerations;
 using Settings = Cait.Config.Modes.Harass;
 
 namespace Cait.Modes

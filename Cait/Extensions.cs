@@ -1,6 +1,5 @@
 ﻿using LeagueSharp;
 using LeagueSharp.SDK;
-using LeagueSharp.SDK.Core.Wrappers.Damages;
 
 namespace Cait
 {

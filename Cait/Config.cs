@@ -1,12 +1,10 @@
-﻿namespace Cait
+﻿using LeagueSharp.SDK.Enumerations;
+using LeagueSharp.SDK.UI;
+
+using SharpDX;
+
+namespace Cait
 {
-    using LeagueSharp;
-    using LeagueSharp.SDK;
-    using LeagueSharp.SDK.Core.UI.IMenu;
-    using LeagueSharp.SDK.Core.UI.IMenu.Values;
-
-    using SharpDX;
-
     internal static class Config
     {
         private const string MenuName = "D-Caitlyn";

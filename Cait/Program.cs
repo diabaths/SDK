@@ -1,14 +1,14 @@
-﻿namespace Cait
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+
+using LeagueSharp;
+using LeagueSharp.SDK;
+using LeagueSharp.SDK.Enumerations;
+using LeagueSharp.SDK.Utils;
+
+namespace Cait
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Drawing;
-    using System.Linq;
-
-    using LeagueSharp;
-    using LeagueSharp.SDK;
-    using LeagueSharp.SDK.Core.Utils;
-
     internal static class Program
     {
         private static int usemuranama;

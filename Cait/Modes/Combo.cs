@@ -1,24 +1,17 @@
-﻿
-using System;
+﻿using System;
 using System.Linq;
 
-using Cait;
-using Cait.Modes;
-
+using LeagueSharp;
 using LeagueSharp.SDK;
-using LeagueSharp.SDK.Core.Utils;
+using LeagueSharp.SDK.Enumerations;
+using LeagueSharp.SDK.Utils;
 
-using Settings =Cait.Config.Modes.Combo;
+using SharpDX;
+
+using Settings = Cait.Config.Modes.Combo;
 
 namespace Cait.Modes
 {
-    using System;
-
-    using LeagueSharp;
-
-    using SharpDX;
-
-
     internal sealed class Combo : ModeBase
     {
         public static int castR;
