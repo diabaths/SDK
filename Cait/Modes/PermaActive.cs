@@ -20,7 +20,7 @@ namespace Cait.Modes
 
         internal override void Execute()
         {
-            if (E.IsReady() && Settings._emouse)
+            if (E.IsReady() && Settings._emouse.Active)
             {
                 E.Cast(GameObjects.Player.Position.Extend(Game.CursorPos, -(E.Range / 2)));
                GameObjects.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
@@ -100,7 +100,7 @@ namespace Cait.Modes
                 var target = Variables.TargetSelector.GetTarget(R.Range);
                 if (target != null)
                 {
-                    if (target.IsValidTarget(R.Range) && Settings._semiR
+                    if (target.IsValidTarget(R.Range) && Settings._semiR.Active
                         && target.DistanceToPlayer() > Program.Player.GetRealAutoAttackRange())
                     {
                         R.Cast(target);
