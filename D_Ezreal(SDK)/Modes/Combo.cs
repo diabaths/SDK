@@ -1,22 +1,14 @@
-﻿
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 
-using LeagueSharp;
 using LeagueSharp.SDK;
-using LeagueSharp.SDK.Core.Utils;
+using LeagueSharp.SDK.Enumerations;
+using LeagueSharp.SDK.Utils;
 
-using SharpDX;
-
-using Collision = LeagueSharp.SDK.Collision;
 using Settings = D_Ezreal_SDK_.Config.Modes.Combo;
 
 namespace D_Ezreal_SDK_.Modes
 {
-    using System;
-   
-    using LeagueSharp.SDK.Core.Wrappers.Damages;
-
     internal sealed class Combo : ModeBase
     {
         public static int castR;

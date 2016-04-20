@@ -5,11 +5,11 @@ using System.Drawing;
 
 using LeagueSharp;
 using LeagueSharp.SDK;
-using LeagueSharp.SDK.Core.Utils;
 
 namespace D_Ezreal_SDK_
 {
-    using System.Linq;
+    using LeagueSharp.SDK.Enumerations;
+    using LeagueSharp.SDK.Utils;
 
     internal static class Program
     {
@@ -24,6 +24,8 @@ namespace D_Ezreal_SDK_
         internal static Obj_AI_Hero Player;
 
         private const string ChampName = "Ezreal";
+
+        public static object SharpDX { get; private set; }
 
         internal static void Main(string[] args)
         {
@@ -79,16 +81,7 @@ namespace D_Ezreal_SDK_
             Logging.Write()(LogLevel.Info, "D-Ezreal Loaded successfully!");
 
             Notifications.Add(
-                new Notification("D-Ezreal Loaded!", "Enjoy the Free elo Tnxkkbb!")
-                    {
-                        HeaderTextColor =
-                            SharpDX.Color.MediumOrchid,
-                        BodyTextColor =
-                            SharpDX.Color.BlanchedAlmond,
-                        Icon =
-                            NotificationIconType.Check,
-                        IconFlash = true
-                    });
+                new Notification("D-Ezreal Loaded!", "Enjoy the Free elo Tnxkkbb!"));
         }
 
         private static void OnUpdate(EventArgs args)

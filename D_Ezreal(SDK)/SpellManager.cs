@@ -1,6 +1,7 @@
-﻿
-using LeagueSharp;
+﻿using LeagueSharp;
+using LeagueSharp.Data.Enumerations;
 using LeagueSharp.SDK;
+using LeagueSharp.SDK.Enumerations;
 
 namespace D_Ezreal_SDK_
 {

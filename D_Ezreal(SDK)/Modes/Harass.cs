@@ -1,16 +1,11 @@
-﻿
-using System.Collections.Generic;
-using System.Linq;
+﻿using LeagueSharp.SDK;
 
-using LeagueSharp.SDK;
-
-using SharpDX;
-
-using Collision = LeagueSharp.SDK.Collision;
 using Settings = D_Ezreal_SDK_.Config.Modes.Harass;
 
 namespace D_Ezreal_SDK_.Modes
 {
+    using LeagueSharp.SDK.Enumerations;
+
     internal sealed class Harass : ModeBase
     {
         internal override bool ShouldBeExecuted()

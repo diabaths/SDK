@@ -19,10 +19,10 @@ namespace D_Ezreal_SDK_
 
             internal DamageInfo(string tag, Func<SharpDX.Color> color, Func<Obj_AI_Base, float> damageCalcFunc, Func<bool> enabled)
             {
-                Tag = tag;
-                Color = color;
-                DamageCalcFunc = damageCalcFunc;
-                Enabled = enabled;
+                this.Tag = tag;
+                this.Color = color;
+                this.DamageCalcFunc = damageCalcFunc;
+                this.Enabled = enabled;
             }
         }
 
