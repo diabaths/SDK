@@ -84,7 +84,7 @@ namespace Cait.Modes
                                     Range = Q.Range
                                 });
 
-                    if (prediction.Hitchance >= HitChance.High
+                    if (prediction.Hitchance >= HitChance.VeryHigh
                         && target.DistanceToPlayer() > Program.Player.GetRealAutoAttackRange())
                     {
                         Q.Cast(prediction.CastPosition);
