@@ -96,7 +96,7 @@ namespace Cait
         private static void OnGapCloser(object oSender, Events.GapCloserEventArgs args)
         {
             var sender = args.Sender;
-            if (Config.Modes.Misc.Gap_E && sender.Distance(GameObjects.Player.ServerPosition) <= 250)
+            if (Config.Modes.Misc.Gap_E && sender.Distance(GameObjects.Player.ServerPosition) <= 400)
             {
                 if (args.IsDirectedToPlayer)
                 {

@@ -90,7 +90,7 @@ namespace Cait.Modes
             {
                 var target = Variables.TargetSelector.GetTarget(W);
                 if (target != null)
-                {
+                { 
                     var prediction =
                         Movement.GetPrediction(
                             new PredictionInput
