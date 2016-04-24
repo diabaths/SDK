@@ -100,22 +100,25 @@ namespace Cait.Modes
                 var target = Variables.TargetSelector.GetTarget(R.Range);
                 if (target != null)
                 {
-                    if (target.IsValidTarget(R.Range) && Settings._semiR.Active
-                        && target.DistanceToPlayer() > Program.Player.GetRealAutoAttackRange())
+                    var pred = R.GetPrediction(target);
+                    if (!pred.CollisionObjects.Any(obj => obj is Obj_AI_Hero))
                     {
-                        R.Cast(target);
-                    }
+                        if (target.IsValidTarget(R.Range) && Settings._semiR.Active
+                            && target.DistanceToPlayer() > 1200)
+                        {
+                            R.Cast(target);
+                        }
 
-                    if (GameObjects.Player.CountEnemyHeroesInRange(R.Range) > 1) return;
-                    if (Q.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQ(true))
-                        && target.IsValidTarget(Q.Range)) return;
-                    if (Q.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQAuto(true))
-                        && target.IsValidTarget(Q.Range)) return;
-                    if (target.DistanceToPlayer() < target.GetRealAutoAttackRange()
-                        && target.Health <= GameObjects.Player.GetAutoAttackDamage(target)) return;
-                    if (target.DistanceToPlayer() > target.GetRealAutoAttackRange())
-                    {
-                        R.Cast(target);
+                        if (Q.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQ(true))
+                            && target.IsValidTarget(Q.Range)) return;
+                        if (Q.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQAuto(true))
+                            && target.IsValidTarget(Q.Range)) return;
+                        if (target.DistanceToPlayer() < target.GetRealAutoAttackRange()
+                            && target.Health <= GameObjects.Player.GetAutoAttackDamage(target)) return;
+                        if (target.DistanceToPlayer() > 1200)
+                        {
+                            R.Cast(target);
+                        }
                     }
                 }
             }

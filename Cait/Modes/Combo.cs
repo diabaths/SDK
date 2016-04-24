@@ -157,10 +157,13 @@ namespace Cait.Modes
             if (R.IsReady())
             {
                 var target = Variables.TargetSelector.GetTarget(R);
-                if (GameObjects.EnemyHeroes.Any(x => !x.IsKillableWithR(true))) return;
-                if (target.IsValidTarget(R.Range) && Settings.UseR && !target.IsDead
-                    && target.DistanceToPlayer() > Program.Player.GetRealAutoAttackRange()
-                    && GameObjects.Player.CountEnemyHeroesInRange(R.Range) <= 1 && Environment.TickCount - castR > 700) R.Cast(target);
+                var pred = R.GetPrediction(target);
+                if (!pred.CollisionObjects.Any(obj => obj is Obj_AI_Hero))
+                {
+                    if (GameObjects.EnemyHeroes.Any(x => !x.IsKillableWithR(true))) return;
+                    if (target.IsValidTarget(R.Range) && Settings.UseR && !target.IsDead
+                        && target.DistanceToPlayer() > 1200 && Environment.TickCount - castR > 700) R.Cast(target);
+                }
             }
         }
     }

@@ -34,7 +34,7 @@ namespace Cait.Modes
                                     Speed = Q.Speed,
                                     Range = Q.Range
                                 });
-                    if (prediction.Hitchance >= HitChance.High && target.IsValidTarget(Q.Range-150))
+                    if (prediction.Hitchance >= HitChance.VeryHigh && target.IsValidTarget(Q.Range-150))
                     {
                         Q.Cast(prediction.CastPosition);
                     }
