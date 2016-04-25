@@ -59,13 +59,15 @@ namespace Cait.Modes
                             Modes.Combo.castR = Environment.TickCount;
                         }
 
-                    if (Settings.autoq && GameObjects.EnemyHeroes.Any(x => x.HasBuff("caitlynyordletrapinternal"))
+                    if (Settings.autoq && target.HasBuff("caitlynyordletrapinternal")
                         && target.DistanceToPlayer() > target.GetRealAutoAttackRange())
+                    {
                         if (prediction.Hitchance == HitChance.High)
                         {
                             Q.Cast(prediction.CastPosition);
                             Modes.Combo.castR = Environment.TickCount;
                         }
+                    }
                 }
             }
 
