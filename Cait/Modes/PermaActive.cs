@@ -62,11 +62,8 @@ namespace Cait.Modes
                     if (Settings.autoq && target.HasBuff("caitlynyordletrapinternal")
                         && target.DistanceToPlayer() > target.GetRealAutoAttackRange())
                     {
-                        if (prediction.Hitchance == HitChance.High)
-                        {
-                            Q.Cast(prediction.CastPosition);
-                            Modes.Combo.castR = Environment.TickCount;
-                        }
+                        Q.Cast(target);
+                        Modes.Combo.castR = Environment.TickCount;
                     }
                 }
             }
