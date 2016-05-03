@@ -59,7 +59,7 @@ namespace D_Ezreal_SDK_.Modes
             if (Q.IsReady() && Settings.UseQ)
             {
                 var target = Variables.TargetSelector.GetTarget(Q);
-                if (target != null)
+                if (target.IsValidTarget(Q.Range))
                 {
                     var prediction =
                         Movement.GetPrediction(
@@ -82,7 +82,7 @@ namespace D_Ezreal_SDK_.Modes
             if (W.IsReady() && Settings.UseW)
             {
                 var target = Variables.TargetSelector.GetTarget(W);
-                if (target != null)
+                if (target.IsValidTarget(W.Range))
                 {
                     var prediction =
                         Movement.GetPrediction(
@@ -105,7 +105,7 @@ namespace D_Ezreal_SDK_.Modes
             if (Settings.Userr && Environment.TickCount - castR > 500)
             {
                 var target = Variables.TargetSelector.GetTarget(R);
-                if (target != null)
+                if (target.IsValidTarget(R.Range))
                 {
                     var prediction =
                         Movement.GetPrediction(
@@ -123,10 +123,10 @@ namespace D_Ezreal_SDK_.Modes
                 }
             }
 
-            if (R.IsReady() && Settings.UseR && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)))
+            if (R.IsReady() && Settings.UseR)
             {
                 var target = Variables.TargetSelector.GetTarget(R);
-                if (target != null)
+                if (target.IsValidTarget(R.Range) && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)))
                 {
                     var prediction =
                         Movement.GetPrediction(

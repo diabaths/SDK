@@ -6,9 +6,10 @@ using Settings = D_Ezreal_SDK_.Config.Modes.Misc;
 
 namespace  D_Ezreal_SDK_.Modes
 {
+    using System;
+
     using LeagueSharp.SDK.Enumerations;
     using LeagueSharp.SDK.Utils;
-    using System;
 
     internal sealed class PermaActive : ModeBase
     {
@@ -22,7 +23,7 @@ namespace  D_Ezreal_SDK_.Modes
             if (Q.IsReady())
             {
                 var target = Variables.TargetSelector.GetTarget(Q);
-                if (target != null)
+                if (target.IsValidTarget(Q.Range))
                 {
                     var prediction =
                         Movement.GetPrediction(
@@ -63,7 +64,7 @@ namespace  D_Ezreal_SDK_.Modes
             if (W.IsReady())
             {
                 var target = Variables.TargetSelector.GetTarget(W);
-                if (target != null)
+                if (target.IsValidTarget(W.Range))
                 {
                     var prediction =
                         Movement.GetPrediction(
@@ -86,10 +87,10 @@ namespace  D_Ezreal_SDK_.Modes
                 }
             }
 
-            if (R.IsReady() && Settings.UseRM && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)))
+            if (R.IsReady() && Settings.UseRM)
             {
                 var target = Variables.TargetSelector.GetTarget(1500);
-                if (target != null)
+                if (target.IsValidTarget(R.Range))
                 {
                     var prediction =
                         Movement.GetPrediction(
@@ -101,7 +102,7 @@ namespace  D_Ezreal_SDK_.Modes
                                     Speed = R.Speed,
                                     Range = R.Range
                                 });
-                    if (prediction.Hitchance >= HitChance.High)
+                    if (prediction.Hitchance >= HitChance.High && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)))
                     {
                         if (Q.IsReady() && W.IsReady() && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithQW(true))
                             && target.IsValidTarget(Q.Range)) return;

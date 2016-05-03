@@ -19,10 +19,10 @@ namespace Cait.Modes
                 return;
             }
 
-            if (Settings.UseQ && Q.IsReady() && GameObjects.Player.ManaPercent > Settings.Mana)
+            if (Q.IsReady() && GameObjects.Player.ManaPercent > Settings.Mana)
             {
                 var target = Variables.TargetSelector.GetTarget(Q);
-                if (target != null)
+                if (target.IsValidTarget(Q.Range))
                 {
                     var prediction =
                         Movement.GetPrediction(

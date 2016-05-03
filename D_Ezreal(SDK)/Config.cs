@@ -5,6 +5,8 @@ using SharpDX;
 
 namespace D_Ezreal_SDK_
 {
+    using LeagueSharp.SDK;
+
     internal static class Config
     {
         private const string MenuName = "D-Ezreal";
@@ -157,7 +159,7 @@ namespace D_Ezreal_SDK_
 
                 private static readonly MenuBool _useW;
 
-                private static  MenuBool _useHa;
+                private static MenuBool _useHa;
 
                 private static readonly MenuSliderButton _minMana;
 
@@ -169,17 +171,20 @@ namespace D_Ezreal_SDK_
 
                 internal static int Mana => _minMana.Value;
 
+                public static Menu WhiteListMenu { get; private set; }
+
                 static Harass()
                 {
                     Menu = Modes.Menu.Add(new Menu("Harass", "Harass"));
 
                     _useQ = Menu.Add(new MenuBool("UseQ", "Use Q", true));
                     _useW = Menu.Add(new MenuBool("UseW", "Use W", true));
-                   /* if (GameObjects.EnemyHeroes.Any())
-                    {
-                        GameObjects.EnemyHeroes.ForEach(
-                            i => _useHa = Menu.Add(new MenuBool("RHar" + i.ChampionName, "Use Harass On " + i.ChampionName, false)));
-                    }*/
+                    /* if (GameObjects.EnemyHeroes.Any())
+                     {
+                         GameObjects.EnemyHeroes.ForEach(
+                             i => _useHa = Menu.Add(new MenuBool("RHar" + i.ChampionName, "Use Harass On " + i.ChampionName, false)));
+                     }*/
+
                     _minMana = Menu.Add(new MenuSliderButton("Mana", "Min Mana %", 70, 0, 100) { BValue = true });
                 }
 

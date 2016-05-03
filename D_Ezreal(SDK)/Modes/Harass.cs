@@ -5,6 +5,7 @@ using Settings = D_Ezreal_SDK_.Config.Modes.Harass;
 namespace D_Ezreal_SDK_.Modes
 {
     using LeagueSharp.SDK.Enumerations;
+    using LeagueSharp.SDK.UI;
 
     internal sealed class Harass : ModeBase
     {
@@ -15,10 +16,11 @@ namespace D_Ezreal_SDK_.Modes
 
         internal override void Execute()
         {
+            //Vars.Menu["spells"]["e"]["whitelist"][Targets.Target.ChampionName.ToLower()].GetValue<MenuBool>().Value
             if (Settings.UseQ && Q.IsReady() && GameObjects.Player.ManaPercent > Settings.Mana)
             {
                 var target = Variables.TargetSelector.GetTarget(Q);
-                if (target != null)
+                if (target.IsValidTarget(Q.Range))
                 {
                     var prediction =
                         Movement.GetPrediction(
@@ -40,7 +42,7 @@ namespace D_Ezreal_SDK_.Modes
             if (Settings.UseW && W.IsReady() && GameObjects.Player.ManaPercent > Settings.Mana)
             {
                 var target = Variables.TargetSelector.GetTarget(W);
-                if (target != null)
+                if (target.IsValidTarget(W.Range))
                 {
                     var prediction =
                         Movement.GetPrediction(

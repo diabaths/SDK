@@ -264,9 +264,9 @@ namespace Cait
                                     "UseHPpotion",
                                     "Use Healt potion/Refillable/Hunters/Corrupting/Biscuit",
                                     true));
-                        _hpmin = Menu.Add(new MenuSliderButton("minHP", "If Health % <", 50, 0, 100));
+                        _hpmin = Menu.Add(new MenuSliderButton("minHP", "If Health % <", 50, 0, 100) { BValue = true });
                         _usemppotions = Menu.Add(new MenuBool("UseMPpotion", "Use Hunters/Corrupting/Biscuit", true));
-                        _mpmin = Menu.Add(new MenuSliderButton("MinMP", "If Mana % <", 50, 0, 100));
+                        _mpmin = Menu.Add(new MenuSliderButton("MinMP", "If Mana % <", 50, 0, 100) { BValue = true });
 
                     }
 

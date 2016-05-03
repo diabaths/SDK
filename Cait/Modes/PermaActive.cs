@@ -29,7 +29,7 @@ namespace Cait.Modes
             if (Q.IsReady())
             {
                 var target = Variables.TargetSelector.GetTarget(Q);
-                if (target != null)
+                if (target.IsValidTarget(Q.Range))
                 {
                     var prediction =
                         Movement.GetPrediction(
@@ -68,10 +68,10 @@ namespace Cait.Modes
                 }
             }
 
-            if (W.IsReady() && Settings.usews && Environment.TickCount - Modes.Combo.castW > 1000)
+            if (W.IsReady() && Settings.usews && Environment.TickCount - Modes.Combo.castW > 1300 && !GameObjects.Player.IsAttackingPlayer)
             {
                 var target = Variables.TargetSelector.GetTarget(W);
-                if (target != null)
+                if (target.IsValidTarget(W.Range))
                 {
                     var prediction =
                         Movement.GetPrediction(
@@ -97,7 +97,7 @@ namespace Cait.Modes
             if (R.IsReady() && Settings.useRM && GameObjects.EnemyHeroes.Any(x => x.IsKillableWithR(true)) && Environment.TickCount - Modes.Combo.castR > 700)
             {
                 var target = Variables.TargetSelector.GetTarget(R.Range);
-                if (target != null)
+                if (target.IsValidTarget(R.Range))
                 {
                     var pred = R.GetPrediction(target);
                     if (!pred.CollisionObjects.Any(obj => obj is Obj_AI_Hero))

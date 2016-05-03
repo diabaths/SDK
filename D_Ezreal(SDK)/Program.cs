@@ -177,22 +177,22 @@ namespace D_Ezreal_SDK_
         {
             if (Config.Modes.Drawings.DrawQRange)
             {
-                Drawing.DrawCircle(GameObjects.Player.Position, SpellManager.Q.Range, Color.BlueViolet);
+                Render.Circle.DrawCircle(ObjectManager.Player.Position, SpellManager.Q.Range, Color.BlueViolet);
             }
 
             if (Config.Modes.Drawings.DrawWRange)
             {
-                Drawing.DrawCircle(GameObjects.Player.Position, SpellManager.W.Range, Color.BlueViolet);
+                Render.Circle.DrawCircle(ObjectManager.Player.Position, SpellManager.W.Range, Color.BlueViolet);
             }
 
             if (Config.Modes.Drawings.DrawERange)
             {
-                Drawing.DrawCircle(GameObjects.Player.Position, SpellManager.E.Range, Color.BlueViolet);
+                Render.Circle.DrawCircle(ObjectManager.Player.Position, SpellManager.E.Range, Color.BlueViolet);
             }
 
             if (Config.Modes.Drawings.DrawRRange)
             {
-                Drawing.DrawCircle(GameObjects.Player.Position, SpellManager.R.Range, Color.BlueViolet);
+                Render.Circle.DrawCircle(ObjectManager.Player.Position, SpellManager.R.Range, Color.BlueViolet);
             }
         }
     }

@@ -63,14 +63,14 @@ namespace Cait.Modes
 
             if (Q.IsReady() && Settings.UseQ)
             {
-                var target = Variables.TargetSelector.GetTarget(Q);
-                if (target != null)
+                var targetq = Variables.TargetSelector.GetTarget(Q);
+                if (targetq.IsValidTarget(Q.Range))
                 {
                     var prediction =
                         Movement.GetPrediction(
                             new PredictionInput
                                 {
-                                    Unit = target,
+                                    Unit = targetq,
                                     Delay = Q.Delay,
                                     Radius = Q.Width,
                                     Speed = Q.Speed,
@@ -78,7 +78,7 @@ namespace Cait.Modes
                                 });
 
                     if (prediction.Hitchance >= HitChance.VeryHigh
-                        && target.DistanceToPlayer() > Program.Player.GetRealAutoAttackRange())
+                        && targetq.DistanceToPlayer() > Program.Player.GetRealAutoAttackRange())
                     {
                         Q.Cast(prediction.CastPosition);
                         castR = Environment.TickCount;
@@ -86,40 +86,40 @@ namespace Cait.Modes
                 }
             }
 
-            if (W.IsReady() && Settings.UseW)
+            if (W.IsReady() && Settings.UseW && !GameObjects.Player.IsAttackingPlayer)
             {
-                var target = Variables.TargetSelector.GetTarget(W);
-                if (target != null)
+                var targetw = Variables.TargetSelector.GetTarget(W);
+                if (targetw.IsValidTarget(W.Range))
                 { 
                     var prediction =
                         Movement.GetPrediction(
                             new PredictionInput
                                 {
-                                    Unit = target,
+                                    Unit = targetw,
                                     Delay = W.Delay,
                                     Radius = W.Width,
                                     Speed = W.Speed,
                                     Range = W.Range
                                 });
-                    if (target.IsMelee && target.IsFacing(GameObjects.Player) && target.DistanceToPlayer() < 300 && Environment.TickCount - castW > 1000)
+                    if (targetw.IsMelee && targetw.IsFacing(GameObjects.Player) && targetw.DistanceToPlayer() < 300 && Environment.TickCount - castW > 1300)
                     {
                         W.Cast(GameObjects.Player);
                         castR = Environment.TickCount;
                         castW = Environment.TickCount;
                     }
 
-                    if (prediction.Hitchance >= HitChance.VeryHigh && target.IsFacing(GameObjects.Player)
-                        && Environment.TickCount - castW > 1000)
+                    if (prediction.Hitchance >= HitChance.VeryHigh && targetw.IsFacing(GameObjects.Player)
+                        && Environment.TickCount - castW > 1300)
                     {
                         W.Cast(prediction.CastPosition);
                         castR = Environment.TickCount;
                         castW = Environment.TickCount;
                     }
 
-                    if (!target.IsFacing(GameObjects.Player) && Environment.TickCount - castW > 2000)
+                    if (!targetw.IsFacing(GameObjects.Player) && Environment.TickCount - castW > 2000)
                     {
-                        var vector = target.ServerPosition - ObjectManager.Player.Position;
-                        var Behind = W.GetPrediction(target).CastPosition + Vector3.Normalize(vector) * 100;
+                        var vector = targetw.ServerPosition - ObjectManager.Player.Position;
+                        var Behind = W.GetPrediction(targetw).CastPosition + Vector3.Normalize(vector) * 100;
                         W.Cast(Behind);
                         castR = Environment.TickCount;
                         castW = Environment.TickCount;
@@ -129,24 +129,24 @@ namespace Cait.Modes
 
             if (E.IsReady() && Settings.UseE)
             {
-                var target = Variables.TargetSelector.GetTarget(1200);
-                if (target != null)
+                var targete = Variables.TargetSelector.GetTarget(1200);
+                if (targete.IsValidTarget(E.Range))
                 {
-                    if (target.IsValidTarget(350))
+                    if (targete.IsValidTarget(350))
                     {
-                        E.Cast(target);
-                        if (Q.IsReady()) DelayAction.Add(250, () => Q.Cast(Q.GetPrediction(target).CastPosition));
+                        E.Cast(targete);
+                        if (Q.IsReady()) DelayAction.Add(250, () => Q.Cast(Q.GetPrediction(targete).CastPosition));
                         castR = Environment.TickCount;
                     }
 
-                    if (target.IsValidTarget(1200) && GameObjects.Player.CountEnemyHeroesInRange(2000) <= 1)
+                    if (targete.IsValidTarget(1200) && GameObjects.Player.CountEnemyHeroesInRange(2000) <= 1)
                     {
                         if (
                             GameObjects.EnemyHeroes.Any(
                                 x =>
                                 x.IsKillableWithauto(true)
-                                && target.DistanceToPlayer() > Program.Player.GetRealAutoAttackRange())
-                            && !target.IsFacing(GameObjects.Player))
+                                && targete.DistanceToPlayer() > Program.Player.GetRealAutoAttackRange())
+                            && !targete.IsFacing(GameObjects.Player))
                         {
                             E.Cast(GameObjects.Player.Position.Extend(Game.CursorPos, -(E.Range / 2)));
                         }
