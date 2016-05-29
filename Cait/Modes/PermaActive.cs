@@ -1,16 +1,14 @@
 ﻿using System.Linq;
-
+using System;
+using LeagueSharp;
+using LeagueSharp.SDK.Core.Utils;
+using LeagueSharp.SDK.Core.Wrappers.Damages;
 using LeagueSharp.SDK;
 
 using Settings = Cait.Config.Modes.Misc;
 
 namespace Cait.Modes
 {
-    using System;
-    using LeagueSharp;
-    using LeagueSharp.SDK.Enumerations;
-    using LeagueSharp.SDK.Utils;
-
     internal sealed class PermaActive : ModeBase
     {
         internal override bool ShouldBeExecuted()
@@ -59,7 +57,7 @@ namespace Cait.Modes
                             Modes.Combo.castR = Environment.TickCount;
                         }
 
-                    if (Settings.autoq && target.HasBuff("caitlynyordletrapinternal")
+                    if (Settings.autoq && (target.HasBuff("caitlynyordletrapinternal") || target.HasBuff("caitlynyordletrapdebuff"))
                         && target.DistanceToPlayer() > target.GetRealAutoAttackRange())
                     {
                         Q.Cast(target);

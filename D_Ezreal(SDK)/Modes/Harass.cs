@@ -4,9 +4,6 @@ using Settings = D_Ezreal_SDK_.Config.Modes.Harass;
 
 namespace D_Ezreal_SDK_.Modes
 {
-    using LeagueSharp.SDK.Enumerations;
-    using LeagueSharp.SDK.UI;
-
     internal sealed class Harass : ModeBase
     {
         internal override bool ShouldBeExecuted()

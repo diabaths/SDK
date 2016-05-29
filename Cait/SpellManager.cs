@@ -4,7 +4,6 @@ using LeagueSharp.SDK;
 namespace Cait
 {
     using LeagueSharp.Data.Enumerations;
-    using LeagueSharp.SDK.Enumerations;
 
     internal static class SpellManager
     {
@@ -28,7 +27,7 @@ namespace Cait
                 Radius = Q.Width,
                 Speed = Q.Speed,
                 Range = Q.Range,
-                CollisionObjects = CollisionableObjects.Minions
+               
             };
         }
 

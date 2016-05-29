@@ -4,12 +4,11 @@ using LeagueSharp.SDK;
 
 using Settings = D_Ezreal_SDK_.Config.Modes.Misc;
 
-namespace  D_Ezreal_SDK_.Modes
+namespace D_Ezreal_SDK_.Modes
 {
     using System;
-
-    using LeagueSharp.SDK.Enumerations;
-    using LeagueSharp.SDK.Utils;
+    using LeagueSharp.SDK.Core.Utils;
+    using LeagueSharp.SDK.Core.Wrappers.Damages;
 
     internal sealed class PermaActive : ModeBase
     {

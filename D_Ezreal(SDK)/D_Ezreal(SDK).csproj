@@ -52,11 +52,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\LeagueSharp\System\LeagueSharp.dll</HintPath>
     </Reference>
-    <Reference Include="LeagueSharp.Data">
-      <HintPath>C:\LeagueSharp\System\LeagueSharp.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="LeagueSharp.SDK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=81fd73eb5b0f2c8a, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="LeagueSharp.SDK">
       <HintPath>C:\LeagueSharp\System\LeagueSharp.SDK.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX, Version=2.6.3.0, Culture=neutral, PublicKeyToken=345b829e6e492981, processorArchitecture=MSIL">

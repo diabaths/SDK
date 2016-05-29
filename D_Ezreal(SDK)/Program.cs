@@ -5,12 +5,10 @@ using System.Drawing;
 
 using LeagueSharp;
 using LeagueSharp.SDK;
+using LeagueSharp.SDK.Core.Utils;
 
 namespace D_Ezreal_SDK_
 {
-    using LeagueSharp.SDK.Enumerations;
-    using LeagueSharp.SDK.Utils;
-
     internal static class Program
     {
         internal static bool UseQ;

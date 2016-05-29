@@ -1,6 +1,6 @@
-﻿using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.UI;
-
+﻿using LeagueSharp.SDK;
+using LeagueSharp.SDK.Core.UI.IMenu;
+using LeagueSharp.SDK.Core.UI.IMenu.Values;
 using SharpDX;
 
 namespace Cait

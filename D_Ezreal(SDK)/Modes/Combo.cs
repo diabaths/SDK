@@ -2,10 +2,10 @@
 using System.Linq;
 
 using LeagueSharp.SDK;
-using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.Utils;
 
 using Settings = D_Ezreal_SDK_.Config.Modes.Combo;
+using LeagueSharp.SDK.Core.Utils;
+using LeagueSharp.SDK.Core.Wrappers.Damages;
 
 namespace D_Ezreal_SDK_.Modes
 {

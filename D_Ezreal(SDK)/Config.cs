@@ -1,12 +1,10 @@
-﻿using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.UI;
-
+﻿using LeagueSharp.SDK;
+using LeagueSharp.SDK.Core.UI.IMenu;
+using LeagueSharp.SDK.Core.UI.IMenu.Values;
 using SharpDX;
 
 namespace D_Ezreal_SDK_
-{
-    using LeagueSharp.SDK;
-
+{    
     internal static class Config
     {
         private const string MenuName = "D-Ezreal";

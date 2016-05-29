@@ -4,8 +4,7 @@ using System.Drawing;
 
 using LeagueSharp;
 using LeagueSharp.SDK;
-using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.Utils;
+using LeagueSharp.SDK.Core.Utils;
 
 namespace Cait
 {

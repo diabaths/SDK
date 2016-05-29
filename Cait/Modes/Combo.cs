@@ -3,9 +3,7 @@ using System.Linq;
 
 using LeagueSharp;
 using LeagueSharp.SDK;
-using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.Utils;
-
+using LeagueSharp.SDK.Core.Utils;
 using SharpDX;
 
 using Settings = Cait.Config.Modes.Combo;
